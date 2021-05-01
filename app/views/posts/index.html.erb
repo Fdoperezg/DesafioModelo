@@ -2,6 +2,23 @@
 
 <h1>Posts</h1>
 
+<%= form_for @post, remote: true, data: { confirm: '¿Estas seguro que quieres crear este post?' } do |form| %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit data: {disable_with: "Enviando"} %>
+  </div>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -11,14 +28,14 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="my_post">
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, remote: true, data: { confirm: '¿Estás seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
